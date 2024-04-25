@@ -3,6 +3,7 @@
 Prototype of identity-based encryption based on [Boneh-Franklin scheme](https://crypto.stanford.edu/~dabo/papers/bfibe.pdf), leveraging [gnark-crypto library](https://github.com/Consensys/gnark-crypto).
 
 
+## Run
 ````
 go build
 ./id-based-encryption
@@ -31,8 +32,6 @@ POST **/decrypt**
 }
 ````
 
-***
-
 ## TPKG APIs
 
 GET **/master-public-key**
@@ -42,4 +41,4 @@ POST **/extract**
 {
     "Id": "me@gmail.com"
 }
-```
+````
