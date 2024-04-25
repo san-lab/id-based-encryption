@@ -17,15 +17,30 @@ var order = fr.Modulus()
 var one = new(big.Int).SetInt64(1)
 
 type PublicKey struct {
-	A bls12381.G1Affine
+	A bls12381.G1Affine `json:"a"`
 }
 
 type PrivateKey struct {
-	PublicKey PublicKey
-	Scalar    [SizeFr]byte
+	PublicKey PublicKey    `json:"publickey"`
+	Scalar    [SizeFr]byte `json:"scalar"`
 }
 
 var PublicMasterKey PublicKey
+
+func (pub PublicKey) Marshal() ([]byte, error) {
+	pubM := pub.A.Marshal()
+	return pubM, nil
+}
+
+func (pub *PublicKey) Unmarshal(data []byte) error {
+	A := new(bls12381.G1Affine)
+	err := A.Unmarshal(data)
+	if err != nil {
+		return err
+	}
+	pub.A = *A
+	return nil
+}
 
 // privKey, err := ecdsa.GenerateKey(seed)
 // Cannot use the above line because ecdsa.PrivateKey has inaccesible scalar

@@ -13,7 +13,7 @@ type SoulToken interface {
 }
 
 // Only the owner of the id should be able to call it
-func PrivateKeyForID(id []byte, soul SoulToken) (*bls12381.G2Affine, error) {
+func Extract(id []byte, soul SoulToken) (*bls12381.G2Affine, error) {
 	_ = soul
 	// Calculate sidH = s * H2(id)
 	idH, err := common.H2(id)

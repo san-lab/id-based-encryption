@@ -12,8 +12,6 @@ func Initialize() {
 		generatePrivateMasterKey()
 		saveMasterPrivateKey()
 	}
-
-	servePublicKey()
 }
 
 func generatePrivateMasterKey() error {
@@ -33,11 +31,6 @@ func findMasterPrivateKey() bool {
 	return false
 }
 
-func servePublicKey() {
-	// serve through http server
-}
-
-// will need this if client is not in the same piece of software
 func GetPublicMasterKey() common.PublicKey {
 	return privateMasterKey.PublicKey
 }
