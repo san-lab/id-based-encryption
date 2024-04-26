@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	bls12381 "github.com/consensys/gnark-crypto/ecc/bls12-381"
+	"github.com/san-lab/id-based-encryption/common"
 )
 
 const ENCRYPT_ENDPOINT = "/encrypt"
@@ -50,12 +51,6 @@ func encryptHandler(w http.ResponseWriter, r *http.Request) {
 
 	request := new(EncryptRequest)
 	json.Unmarshal(body, request)
-
-	fmt.Println(string(body))
-	fmt.Println(request)
-	fmt.Println(request.Plaintext)
-	fmt.Println([]byte(request.Plaintext))
-
 	ciphertext, err := Encrypt([]byte(request.Id), []byte(request.Plaintext))
 
 	if err != nil {
@@ -105,8 +100,7 @@ func decryptHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, "Error: %s", err)
 	}
-	fmt.Println(plaintext)
-	fmt.Fprintf(w, "Plaintext: %s", plaintext)
+	fmt.Fprintf(w, "Plaintext: %s", common.UNPAD(plaintext))
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
@@ -131,6 +125,7 @@ func publicMasterKeyHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, "Error: %s", err)
 	}
+	// fmt.Println("Retrieved PublicMasterKey:", PublicMasterKey)
 	//}
 	pubM, err := PublicMasterKey.Marshal()
 	if err != nil {

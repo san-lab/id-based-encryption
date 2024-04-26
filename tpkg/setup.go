@@ -19,6 +19,7 @@ func generatePrivateMasterKey() error {
 	// Calculate (s, sP)
 	privateMasterKey, err = common.GenerateKeysG1()
 	common.PublicMasterKey = privateMasterKey.PublicKey // set in common for now...
+	// fmt.Println("Setup PublicMasterKey:", common.PublicMasterKey)
 	return err
 }
 

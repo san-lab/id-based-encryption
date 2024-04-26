@@ -18,6 +18,7 @@ var PublicMasterKey common.PublicKey
 
 // max msg length 256 bytes
 func Encrypt(id, plaintext []byte) (BLSCiphertext, error) {
+	//fmt.Printf("Encrypt %s, %s", id, plaintext)
 	// From randomness r, calculate U = rP
 	r := make([]byte, common.SizeFr)
 	_, err := io.ReadFull(rand.Reader, r)
@@ -32,7 +33,7 @@ func Encrypt(id, plaintext []byte) (BLSCiphertext, error) {
 	if err != nil {
 		return BLSCiphertext{}, err
 	}
-	pair, err := common.PairG1G2(common.PublicMasterKey.A, idH) // TODO: should get tpkg public key from somewhere else
+	pair, err := common.PairG1G2(PublicMasterKey.A, idH) // TODO: should get tpkg public key from somewhere else
 	if err != nil {
 		return BLSCiphertext{}, err
 	}

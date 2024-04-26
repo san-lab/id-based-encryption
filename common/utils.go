@@ -127,3 +127,11 @@ func PAD(a []byte, n int) []byte {
 	padded := append(zeroes, a...)
 	return padded
 }
+
+func UNPAD(a []byte) []byte {
+	i := 0
+	for a[i] == 0 {
+		i++
+	}
+	return a[i:]
+}

@@ -14,6 +14,7 @@ type SoulToken interface {
 
 // Only the owner of the id should be able to call it
 func Extract(id []byte, soul SoulToken) (*bls12381.G2Affine, error) {
+	//fmt.Printf("Extract %s", id)
 	_ = soul
 	// Calculate sidH = s * H2(id)
 	idH, err := common.H2(id)

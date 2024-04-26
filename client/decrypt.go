@@ -6,6 +6,7 @@ import (
 )
 
 func Decrypt(userPrivKey *bls12381.G2Affine, ciphertext BLSCiphertext) ([]byte, error) {
+	//fmt.Printf("Decrypt %v, %v", userPrivKey, ciphertext)
 	// Calculate m = V xor H3(e(rP, sidH))
 	pair, err := common.PairG1G2(*ciphertext.U, *userPrivKey)
 	if err != nil {

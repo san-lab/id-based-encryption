@@ -20,3 +20,10 @@ func TestPad(t *testing.T) {
 	fmt.Println(PAD(a, 1))
 	fmt.Println(PAD(a, -1))
 }
+
+func TestUnpad(t *testing.T) {
+	a := []byte{0, 0, 3, 4}
+	b := []byte{3, 4}
+	fmt.Println(a, b)
+	fmt.Println(UNPAD(a), UNPAD(b))
+}

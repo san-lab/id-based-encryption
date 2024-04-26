@@ -15,7 +15,7 @@ const HEALTH_ENDPOINT = "/health"
 var SERVER_PORT = 9000
 
 type ExtractRequest struct {
-	Id []byte `json:"id"`
+	Id string `json:"id"`
 	// SoulToken...
 }
 
@@ -49,7 +49,7 @@ func extractHandler(w http.ResponseWriter, r *http.Request) {
 
 	request := new(ExtractRequest)
 	json.Unmarshal(body, request)
-	userPrivKey, err := Extract(request.Id, nil)
+	userPrivKey, err := Extract([]byte(request.Id), nil)
 	if err != nil {
 		fmt.Fprintf(w, "Error: %s", err)
 	}
